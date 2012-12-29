@@ -8,14 +8,14 @@ import com.google.gson.Gson;
 @SuppressWarnings("serial")
 public class Episode implements Serializable {
 
-	private Long episodeId;
-	private Long episodeNumber;
-	private String overview;
-	private String episodeName;
-	private Date firstAired;
-	private Long seasonNumber;
-	private Long lastUpdated;
-	private Long tvshowId;
+	protected Long episodeId;
+	protected Long episodeNumber;
+	protected String overview;
+	protected String episodeName;
+	protected Date firstAired;
+	protected Long seasonNumber;
+	protected Long lastUpdated;
+	protected Long tvshowId;
 
 	public Long getTvshowId() {
 		return tvshowId;

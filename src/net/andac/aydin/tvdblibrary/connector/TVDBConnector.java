@@ -53,7 +53,6 @@ public class TVDBConnector {
 
 	// TODO Enter your API Key here
 	static private final String API_KEY = " ... ";
-
 	static private final String THETVDB_UPDATED_TVSHOWS_DAILY_URL = "http://www.thetvdb.com/api/"
 			+ API_KEY + "/updates/updates_day.zip";
 	static private final String THETVDB_UPDATED_TVSHOWS_WEEKLY_URL = "http://www.thetvdb.com/api/"
