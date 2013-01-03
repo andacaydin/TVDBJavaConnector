@@ -17,7 +17,7 @@ public class Tvshow implements Serializable, TvshowInterface {
 	private ArrayList<EpisodeInterface> episodes;
 	private Long lastUpdated;
 	private Language language;
-	private ArrayList<Banner> banners;
+	private ArrayList<BannerInterface> banners;
 	private ArrayList<Actor> actors;
 
 	/*
@@ -26,9 +26,9 @@ public class Tvshow implements Serializable, TvshowInterface {
 	 * @see net.andac.aydin.tvdblibrary.datatypes.TvshowInterface#getBanners()
 	 */
 	@Override
-	public ArrayList<Banner> getBanners() {
+	public ArrayList<BannerInterface> getBanners() {
 		if (this.banners == null) {
-			banners = new ArrayList<Banner>();
+			banners = new ArrayList<BannerInterface>();
 		}
 		return banners;
 	}
