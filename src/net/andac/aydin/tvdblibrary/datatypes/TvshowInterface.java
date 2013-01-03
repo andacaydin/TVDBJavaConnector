@@ -5,7 +5,7 @@ import java.util.Date;
 
 public interface TvshowInterface {
 
-	public abstract ArrayList<BannerInterface> getBanners();
+	public abstract ArrayList<Banner> getBanners();
 
 	public abstract ArrayList<Actor> getActors();
 
@@ -28,7 +28,7 @@ public interface TvshowInterface {
 
 	public abstract void setFirstAired(Date firstAired);
 
-	public abstract ArrayList<EpisodeInterface> getEpisodes();
+	public abstract ArrayList<Episode> getEpisodes();
 
 	public abstract Long getLastUpdated();
 

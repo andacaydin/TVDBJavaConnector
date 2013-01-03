@@ -14,10 +14,10 @@ public class Tvshow implements Serializable, TvshowInterface {
 	private String seriesName;
 	private String overview;
 	private Date firstAired;
-	private ArrayList<EpisodeInterface> episodes;
+	private ArrayList<Episode> episodes;
 	private Long lastUpdated;
 	private Language language;
-	private ArrayList<BannerInterface> banners;
+	private ArrayList<Banner> banners;
 	private ArrayList<Actor> actors;
 
 	/*
@@ -26,9 +26,9 @@ public class Tvshow implements Serializable, TvshowInterface {
 	 * @see net.andac.aydin.tvdblibrary.datatypes.TvshowInterface#getBanners()
 	 */
 	@Override
-	public ArrayList<BannerInterface> getBanners() {
+	public ArrayList<Banner> getBanners() {
 		if (this.banners == null) {
-			banners = new ArrayList<BannerInterface>();
+			banners = new ArrayList<Banner>();
 		}
 		return banners;
 	}
@@ -152,9 +152,9 @@ public class Tvshow implements Serializable, TvshowInterface {
 	 * @see net.andac.aydin.tvdblibrary.datatypes.TvshowInterface#getEpisodes()
 	 */
 	@Override
-	public ArrayList<EpisodeInterface> getEpisodes() {
+	public ArrayList<Episode> getEpisodes() {
 		if (this.episodes == null) {
-			episodes = new ArrayList<EpisodeInterface>();
+			episodes = new ArrayList<Episode>();
 		}
 		return episodes;
 	}

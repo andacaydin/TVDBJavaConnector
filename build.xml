@@ -16,6 +16,13 @@
     <target name="buildAndPublish" description="Package into JAR" depends="jar">
         <copy file="tvdblibrary.jar" todir="../episode-reminder/libs/"/>
         <copy file="tvdblibrary.jar" todir="../wapp-episode-reminder/war/web-inf/lib/"/>
-        <copy file="tvdblibrary.jar" todir="../wapp-episode-reminder-test/lib/"/>
     </target>
+    
+     <target name="clean" description="clean up">
+       <delete dir="bin"/>
+       <delete>
+            <fileset dir="." includes="*.class"/>
+        </delete>
+    </target>
+    
 </project>

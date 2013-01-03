@@ -31,7 +31,6 @@ import javax.xml.xpath.XPathFactory;
 import net.andac.aydin.tvdblibrary.connector.exceptions.TVDBOutboundConnectionException;
 import net.andac.aydin.tvdblibrary.datatypes.Actor;
 import net.andac.aydin.tvdblibrary.datatypes.Banner;
-import net.andac.aydin.tvdblibrary.datatypes.BannerInterface;
 import net.andac.aydin.tvdblibrary.datatypes.Episode;
 import net.andac.aydin.tvdblibrary.datatypes.Language;
 import net.andac.aydin.tvdblibrary.datatypes.TVDBFile;
@@ -532,8 +531,8 @@ public class TVDBConnector {
 		ArrayList<TVDBFile> allFiles = new ArrayList<TVDBFile>();
 
 		// load all banners
-		ArrayList<BannerInterface> banners = tvShow.getBanners();
-		for (BannerInterface banner : banners) {
+		ArrayList<Banner> banners = tvShow.getBanners();
+		for (Banner banner : banners) {
 			TVDBFile file = new TVDBFile();
 			try {
 				byte[] loadFileFromUrl = loadFileFromUrl(TVDATABASE_URL
@@ -575,8 +574,8 @@ public class TVDBConnector {
 		allFiles.add(tvshowFile);
 
 		// load all banners
-		ArrayList<BannerInterface> banners = tvShow.getBanners();
-		for (BannerInterface banner : banners) {
+		ArrayList<Banner> banners = tvShow.getBanners();
+		for (Banner banner : banners) {
 			TVDBFile file = new TVDBFile();
 			String uri = TVDATABASE_URL + "/banners/" + banner.getBannerPath();
 			try {
