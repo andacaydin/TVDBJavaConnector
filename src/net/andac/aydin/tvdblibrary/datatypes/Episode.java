@@ -3,7 +3,6 @@ package net.andac.aydin.tvdblibrary.datatypes;
 import java.io.Serializable;
 import java.util.Date;
 
-
 import com.google.gson.Gson;
 
 @SuppressWarnings("serial")
@@ -17,7 +16,6 @@ public class Episode implements Serializable {
 	protected Long seasonNumber;
 	protected Long lastUpdated;
 	protected Long tvshowId;
-	private Boolean isWatched;
 
 	public Long getTvshowId() {
 		return tvshowId;
@@ -112,16 +110,4 @@ public class Episode implements Serializable {
 		Gson gson = new Gson();
 		return gson.toJson(this);
 	}
-
-	public Boolean getIsWatched() {
-		if (isWatched == null) {
-			isWatched = false;
-		}
-		return isWatched;
-	}
-
-	public void setIsWatched(Boolean isWatched) {
-		this.isWatched = isWatched;
-	}
-
 }
