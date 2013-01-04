@@ -3,7 +3,6 @@ package net.andac.aydin.tvdblibrary.datatypes;
 import java.io.Serializable;
 import java.util.Date;
 
-import net.andac.aydin.tvdblibrary.gson.GsonCreator;
 
 import com.google.gson.Gson;
 
@@ -110,7 +109,7 @@ public class Episode implements Serializable {
 	}
 
 	public String writeGSON() {
-		Gson gson = GsonCreator.createGson();
+		Gson gson = new Gson();
 		return gson.toJson(this);
 	}
 

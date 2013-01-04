@@ -35,7 +35,6 @@ import net.andac.aydin.tvdblibrary.datatypes.Episode;
 import net.andac.aydin.tvdblibrary.datatypes.Language;
 import net.andac.aydin.tvdblibrary.datatypes.TVDBFile;
 import net.andac.aydin.tvdblibrary.datatypes.Tvshow;
-import net.andac.aydin.tvdblibrary.datatypes.TvshowInterface;
 import net.andac.aydin.tvdblibrary.datatypes.UpdateIntervalType;
 
 import org.w3c.dom.Document;
@@ -126,7 +125,7 @@ public class TVDBConnector {
 		return response;
 	}
 
-	private TvshowInterface extractTvShowFromXML(String xmldata)
+	private Tvshow extractTvShowFromXML(String xmldata)
 			throws ParseException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		InputSource source = new InputSource(new StringReader(xmldata));
@@ -156,7 +155,7 @@ public class TVDBConnector {
 		}
 		// Fill up series-information
 		Node seriesNode = tvshowNodes.item(0);
-		TvshowInterface tvshow = TVDBMapper.getInstance().mapTvshow(seriesNode);
+		Tvshow tvshow = TVDBMapper.getInstance().mapTvshow(seriesNode);
 
 		// Fill up episode information
 		for (int i = 0; i < episodesNodes.getLength(); i++) {
@@ -324,7 +323,7 @@ public class TVDBConnector {
 	 * @return
 	 * @throws IOException
 	 */
-	public TvshowInterface retrieveFullTvshowFromTVDB(Long seriesId,
+	public Tvshow retrieveFullTvshowFromTVDB(Long seriesId,
 			Language languageType) throws TVDBOutboundConnectionException {
 
 		byte[] loadFileFromUrl;
@@ -337,7 +336,7 @@ public class TVDBConnector {
 		}
 		ArrayList<TVDBFile> unzipFile = unzipFile(loadFileFromUrl);
 
-		TvshowInterface tvShow = null;
+		Tvshow tvShow = null;
 		for (TVDBFile tvdbFile : unzipFile) {
 
 			// TVSHOW.XML
@@ -523,7 +522,7 @@ public class TVDBConnector {
 	 * @return
 	 * @throws IOException
 	 */
-	public List<TVDBFile> getTvShowBanners(TvshowInterface tvShow)
+	public List<TVDBFile> getTvShowBanners(Tvshow tvShow)
 			throws TVDBOutboundConnectionException {
 		log.log(Level.INFO,
 				TAG + " Gathering tvshow banners (" + tvShow.getSeriesid()
@@ -560,7 +559,7 @@ public class TVDBConnector {
 	 * @return
 	 * @throws IOException
 	 */
-	public TVDBFile getTvShowZipped(TvshowInterface tvShow)
+	public TVDBFile getTvShowZipped(Tvshow tvShow)
 			throws TVDBOutboundConnectionException {
 		log.log(Level.INFO,
 				TAG + " Generating zipped tvshow (" + tvShow.getSeriesid()
