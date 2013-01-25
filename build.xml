@@ -13,7 +13,7 @@
 	
 	<target name="compile" description="Compile source" depends="clean">
 		<mkdir dir="${build}" />
-		<javac srcdir="${src}" destdir="${build}" classpathref="classpath" />
+		<javac srcdir="${src}" destdir="${build}" classpathref="classpath" debug="true"/>
 	</target>
 	
 	<!-- Timestamp for manifest -->

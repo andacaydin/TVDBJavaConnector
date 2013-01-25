@@ -89,6 +89,9 @@ public class Banner implements Serializable {
 	}
 
 	public Boolean getDefaultBanner() {
+		if (defaultBanner == null) {
+			defaultBanner = false;
+		}
 		return defaultBanner;
 	}
 
