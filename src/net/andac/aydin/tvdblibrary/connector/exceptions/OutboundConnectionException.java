@@ -9,4 +9,7 @@ public abstract class OutboundConnectionException extends Exception {
 		super(e);
 	}
 
+	public OutboundConnectionException(String message) {
+		super(message);
+	}
 }

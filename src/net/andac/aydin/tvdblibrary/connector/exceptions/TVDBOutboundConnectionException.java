@@ -8,5 +8,9 @@ public class TVDBOutboundConnectionException extends
 		super(e);
 	}
 
+	public TVDBOutboundConnectionException(String message) {
+		super(message);
+	}
+
 	String errorMessage = "THETVDB Connection error";
 }
