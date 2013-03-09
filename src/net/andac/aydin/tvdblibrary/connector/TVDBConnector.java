@@ -49,18 +49,18 @@ public class TVDBConnector {
 
 	private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
-	static private final String TVDATABASE_URL = "http://www.thetvdb.com";
+	static private final String TVDATABASE_URL = "http://thetvdb.com";
 
 	// TODO Enter your API Key here
-	static private final String API_KEY = " ... ";
-	static private final String THETVDB_UPDATED_TVSHOWS_DAILY_URL = "http://www.thetvdb.com/api/"
-			+ API_KEY + "/updates/updates_day.zip";
-	static private final String THETVDB_UPDATED_TVSHOWS_WEEKLY_URL = "http://www.thetvdb.com/api/"
-			+ API_KEY + "/updates/updates_week.zip";
-	static private final String THETVDB_UPDATED_TVSHOWS_MONTHLY_URL = "http://www.thetvdb.com/api/"
-			+ API_KEY + "/updates/updates_month.zip";
-	static private final String THETVDB_UPDATED_TVSHOWS_ALL_URL = "http://www.thetvdb.com/api/"
-			+ API_KEY + "/updates/updates_all.zip";
+	static private final String API_KEY = "";
+	static private final String THETVDB_UPDATED_TVSHOWS_DAILY_URL = TVDATABASE_URL
+			+ "/api/" + API_KEY + "/updates/updates_day.zip";
+	static private final String THETVDB_UPDATED_TVSHOWS_WEEKLY_URL = TVDATABASE_URL
+			+ "/api/" + API_KEY + "/updates/updates_week.zip";
+	static private final String THETVDB_UPDATED_TVSHOWS_MONTHLY_URL = TVDATABASE_URL
+			+ "/api/" + API_KEY + "/updates/updates_month.zip";
+	static private final String THETVDB_UPDATED_TVSHOWS_ALL_URL = TVDATABASE_URL
+			+ "/api/" + API_KEY + "/updates/updates_all.zip";
 
 	private static final String TAG = "TVDBConnector";
 
@@ -125,8 +125,7 @@ public class TVDBConnector {
 		return response;
 	}
 
-	private Tvshow extractTvShowFromXML(String xmldata)
-			throws ParseException {
+	private Tvshow extractTvShowFromXML(String xmldata) throws ParseException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		InputSource source = new InputSource(new StringReader(xmldata));
 		Document document;
@@ -335,7 +334,10 @@ public class TVDBConnector {
 			throw new TVDBOutboundConnectionException(e);
 		}
 		ArrayList<TVDBFile> unzipFile = unzipFile(loadFileFromUrl);
-
+		if (unzipFile.size() == 0) {
+			throw new TVDBOutboundConnectionException(
+					"No files in zipfile found!");
+		}
 		Tvshow tvShow = null;
 		for (TVDBFile tvdbFile : unzipFile) {
 
@@ -393,6 +395,7 @@ public class TVDBConnector {
 	 */
 	public List<Tvshow> searchSeriesInTVDB(String searchstring,
 			Language languageType) throws TVDBOutboundConnectionException {
+		long startTime = System.nanoTime();
 		List<Tvshow> tvShowList = null;
 		String uri = TVDATABASE_URL + "/api/GetSeries.php?seriesname="
 				+ searchstring + "&language=" + languageType.getId();
@@ -408,6 +411,9 @@ public class TVDBConnector {
 							+ uri, e);
 			throw new TVDBOutboundConnectionException(e);
 		}
+		long endTime = System.nanoTime();
+		log.info("Search for'" + searchstring + " / " + languageType.getId()
+				+ " took " + ((endTime - startTime) / 1000000000f) + " sec");
 		return tvShowList;
 	}
 
