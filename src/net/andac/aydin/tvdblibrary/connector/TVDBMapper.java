@@ -28,7 +28,7 @@ public class TVDBMapper {
 	}
 
 	public TVDBMapper() {
-		formatter = new SimpleDateFormat("yyyy-mm-dd");
+		formatter = new SimpleDateFormat("yyyy-MM-dd");
 	}
 
 	/**
