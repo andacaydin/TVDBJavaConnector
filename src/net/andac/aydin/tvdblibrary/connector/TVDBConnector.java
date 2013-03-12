@@ -314,6 +314,35 @@ public class TVDBConnector {
 		return tvshowList;
 	}
 
+	public Episode retrieveFullEpisodeFromTVDB(Long episodeid,
+			Language languageType) throws TVDBOutboundConnectionException {
+
+		Episode returnepisode = null;
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		String uri = TVDATABASE_URL + "/api/" + API_KEY + "/episodes/"
+				+ episodeid + "/" + languageType.getId() + ".xml";
+
+		Document document;
+		NodeList episodesNodes = null;
+		try {
+			// String xmldata = loadDataFromUrl(uri).toString();
+			// InputSource source = new InputSource(new StringReader(xmldata));
+			document = factory.newDocumentBuilder().parse(uri);
+			XPath xpath = XPathFactory.newInstance().newXPath();
+			// Extract EPISODES
+			XPathExpression episodesExpression = xpath.compile("Data/Episode");
+			episodesNodes = (NodeList) episodesExpression.evaluate(document,
+					XPathConstants.NODESET);
+
+			Node episodeNode = episodesNodes.item(0);
+			returnepisode = TVDBMapper.getInstance().mapEpisode(episodeNode);
+
+		} catch (Exception e) {
+			throw new TVDBOutboundConnectionException(e);
+		}
+		return returnepisode;
+	}
+
 	/**
 	 * Loads a Full TvShow-Entity from thetvdb with all its propertys.
 	 * 
