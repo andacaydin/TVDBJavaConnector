@@ -43,24 +43,20 @@ public class TVDBMapper {
 			Node item = seriesPropertyNodes.item(i);
 			String nodeName = item.getNodeName().toLowerCase();
 			String nodeValue = item.getTextContent();
-			if (nodeValue == null || nodeValue.isEmpty()) {
+			if (nodeValue == null || nodeValue.trim().isEmpty()) {
 				continue;
 			}
 			if (nodeName.equals("id")) {
 				tvshow.setSeriesid(Long.parseLong(nodeValue));
 			}
-			if (nodeName.equals("firstaired") && !nodeValue.isEmpty()) {
+			if (nodeName.equals("firstaired")) {
 				tvshow.setFirstAired(formatter.parse(nodeValue));
 			}
 			if (nodeName.equals("seriesname")) {
 				tvshow.setSeriesName(nodeValue);
 			}
 			if (nodeName.equals("overview")) {
-				if (nodeValue.isEmpty()) {
-					tvshow.setOverview("none");
-				} else {
-					tvshow.setOverview(nodeValue);
-				}
+				tvshow.setOverview(nodeValue);
 			}
 			if (nodeName.equals("lastupdated")) {
 				tvshow.setLastUpdated(Long.parseLong(nodeValue));
@@ -84,7 +80,7 @@ public class TVDBMapper {
 			Node item = childNodes.item(j);
 			String nodeName = item.getNodeName();
 			String nodeValue = item.getTextContent();
-			if (nodeValue == null || nodeValue.isEmpty()) {
+			if (nodeValue == null || nodeValue.trim().isEmpty()) {
 				continue;
 			}
 			if (nodeName.equals("id")) {
@@ -118,7 +114,7 @@ public class TVDBMapper {
 			Node item = childNodes.item(j);
 			String nodeName = item.getNodeName();
 			String nodeValue = item.getTextContent();
-			if (nodeValue == null || nodeValue.isEmpty()) {
+			if (nodeValue == null || nodeValue.trim().isEmpty()) {
 				continue;
 			}
 			if (nodeName.equals("id")) {
@@ -135,7 +131,7 @@ public class TVDBMapper {
 			Node item = childNodes.item(j);
 			String nodeName = item.getNodeName();
 			String nodeValue = item.getTextContent();
-			if (nodeValue == null || nodeValue.isEmpty()) {
+			if (nodeValue == null || nodeValue.trim().isEmpty()) {
 				continue;
 			}
 			if (nodeName.equals("id")) {
@@ -167,7 +163,7 @@ public class TVDBMapper {
 			Node item = childNodes.item(j);
 			String nodeName = item.getNodeName();
 			String nodeValue = item.getTextContent();
-			if (nodeValue == null || nodeValue.isEmpty()) {
+			if (nodeValue == null || nodeValue.trim().isEmpty()) {
 				continue;
 			}
 			if (nodeName.equals("Image")) {
