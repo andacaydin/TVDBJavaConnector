@@ -13,6 +13,8 @@ import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -166,9 +168,9 @@ public class TVDBConnector {
 		return tvshow;
 	}
 
-	private ArrayList<Banner> extractBannersFromXML(String xmldata,
+	private Collection<Banner> extractBannersFromXML(String xmldata,
 			Long tvshowId) throws ParseException {
-		ArrayList<Banner> bannerList = new ArrayList<Banner>();
+		HashMap<String, Banner> bannerList = new HashMap<String, Banner>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		InputSource source = new InputSource(new StringReader(xmldata));
 		Document document;
@@ -195,9 +197,9 @@ public class TVDBConnector {
 			Node seriesNode = bannerNodes.item(j);
 			Banner banner = TVDBMapper.getInstance().mapBanner(seriesNode);
 			banner.setTvshowId(tvshowId);
-			bannerList.add(banner);
+			bannerList.put(banner.getBannerPath(), banner);
 		}
-		return bannerList;
+		return bannerList.values();
 	}
 
 	private ArrayList<Actor> extractActorsFromXML(String xmldata, Long tvshowId)
@@ -384,7 +386,7 @@ public class TVDBConnector {
 			// BANNER.XML
 			if (tvdbFile.getFilename().equals("banners.xml")) {
 				try {
-					ArrayList<Banner> banners = extractBannersFromXML(
+					Collection<Banner> banners = extractBannersFromXML(
 							new String(tvdbFile.getBytearray(), UTF8_CHARSET),
 							tvShow.getSeriesid());
 					tvShow.getBanners().clear();
