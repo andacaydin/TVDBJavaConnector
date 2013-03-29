@@ -16,3 +16,4 @@ Enables following connectivity functions:
 
 Needs:
 * GSON: http://code.google.com/p/google-gson/downloads/detail?name=google-gson-2.2.2-release.zip
+  put in "libs" folder!
